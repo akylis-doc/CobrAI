@@ -1,18 +1,9 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 
-st.set_page_config(page_title="CobraAI", page_icon="💰", layout="wide")
+st.set_page_config(page_title="CobraAI - Home", page_icon="💰", layout="wide")
 
-# Injeta o estilo CSS personalizado
-st.markdown('''
-<style>
-.metric-card{background:#fff;padding:15px;border-radius:12px;border:1px solid #eaeaea}
-</style>
-''', unsafe_allow_html=True)
-
-# 1. INICIALIZAÇÃO DO BANCO DE DADOS GLOBAL
-# Se o estado de sessão não existir, criamos os dados base com valores numéricos reais
+# 1. INICIALIZAÇÃO CENTRAL DO BANCO DE DADOS
 if "df_cobrancas" not in st.session_state:
     st.session_state["df_cobrancas"] = pd.DataFrame({
         "Cliente": ["João", "Maria", "Pedro", "Ana", "Lucas"],
@@ -24,48 +15,34 @@ if "df_cobrancas" not in st.session_state:
         "Motivo": ["Esquecimento", "Sem dinheiro", "Banco", "Esquecimento", "Banco"]
     })
 
-# Puxa os dados atualizados do estado de sessão
-df = st.session_state["df_cobrancas"]
-
-# --- BARRA LATERAL ---
+# Barra lateral global para inserção da API Key
 st.sidebar.title("💰 CobraAI")
-st.sidebar.success("Painel Principal")
+st.sidebar.text_input("Chave API Gemini", type="password", key="gemini_api_key", help="Cole sua chave aqui para ativar a IA em todas as páginas.")
 
-st.title("Dashboard Executivo")
+# Conteúdo do Menu Principal
+st.title("CobraAI — Sistema de Gestão Financeira 💰")
+st.subheader("Selecione um painel abaixo para gerenciar sua operação:")
+st.write("---")
 
-# 2. CÁLCULO DE MÉTRICAS DINÂMICAS
-total_cobrancas = len(df)
-df_pagos = df[df["Status"] == "Pago"]
-df_inadimplentes = df[df["Status"] == "Em atraso"]
-
-valor_recuperado = df_pagos["Valor"].sum()
-qtd_inadimplentes = len(df_inadimplentes)
-taxa_conversao = (len(df_pagos) / total_cobrancas * 100) if total_cobrancas > 0 else 0
-
-c1, c2, c3, c4 = st.columns(4)
-c1.metric("Recuperado", f"R$ {valor_recuperado:,.2f}", "+12%")
-c2.metric("Cobranças", f"{total_cobrancas}", f"+{total_cobrancas}")
-c3.metric("Inadimplentes", f"{qtd_inadimplentes}", "-17")
-c4.metric("Conversão", f"{taxa_conversao:.1f}%", "+4%")
-
-# --- CORPO DO DASHBOARD ---
-col1, col2 = st.columns([2, 1])
+# Layout de Grid para os Botões de Navegação
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
-    # O gráfico agora agrupa os valores reais por mês
-    dados_grafico = df.groupby("Mês", as_index=False)["Valor"].sum()
-    fig = px.bar(dados_grafico, x="Mês", y="Valor", title="Recuperação Financeira por Mês")
-    st.plotly_chart(fig, use_container_width=True)
+    if st.button("📊 Dashboard Executivo", use_container_width=True):
+        st.switch_page("pages/1_Dashboard.py")
 
 with col2:
-    st.subheader("IA Analytics")
-    # Calcula a porcentagem real dos motivos com base nos dados
-    if total_cobrancas > 0:
-        contagem_motivos = df["Motivo"].value_counts(normalize=True) * 100
-        for motivo, porcentagem in contagem_motivos.items():
-            st.info(f"{porcentagem:.0f}% alegam {motivo.lower()}")
-    else:
-        st.info("Sem dados de motivos disponíveis.")
+    if st.button("💸 Cobranças & Cadastros", use_container_width=True):
+        st.switch_page("pages/2_Cobrancas.py")
 
-st.subheader("Últimas cobranças")
-st.dataframe(df[["Cliente", "Valor", "Status", "Data_Cobranca"]], use_container_width=True)
+with col3:
+    if st.button("🤖 Chatbot de Negociação", use_container_width=True):
+        st.switch_page("pages/3_Chat_IA.py")
+
+with col4:
+    if st.button("📈 Relatórios de Inadimplência", use_container_width=True):
+        st.switch_page("pages/4_Relatorios.py")
+
+with col5:
+    if st.button("⚡ Pix e Acordos", use_container_width=True):
+        st.switch_page("pages/5_Pix_e_Acordos.py")
