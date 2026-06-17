@@ -1,11 +1,15 @@
-
 import streamlit as st
 
-st.title("🏦 PIX e Acordos")
+st.set_page_config(page_title="CobraAI - Pix", page_icon="⚡", layout="wide")
 
-st.subheader("PIX Gerado")
-st.code("00020126580014BR.GOV.BCB.PIX0114COBRAAI")
+# Botão para voltar à página principal
+if st.button("🏠 Voltar para a Home"): 
+    st.switch_page("app.py")
 
-st.subheader("Acordos")
-st.success("João - Parcelamento 2x")
-st.info("Pedro - Reagendado para 10/07")
+# Mantém a sincronização da API Key na barra lateral
+st.sidebar.title("💰 CobraAI")
+st.sidebar.text_input("Chave API Gemini", type="password", key="gemini_api_key")
+
+st.title("⚡ Pix e Acordos Automáticos")
+
+st.info("Espaço reservado para integrações futuras de APIs de Gateway de Pagamentos (Geração de Pix Copia e Cola e PDFs de Acordos).")
