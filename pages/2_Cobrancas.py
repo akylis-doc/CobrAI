@@ -14,7 +14,6 @@ st.title("💸 Gestão de Cobranças")
 
 df = st.session_state.get("df_cobrancas")
 
-# --- SISTEMA DE PESQUISA DUPLA (NOME OU TELEFONE) ---
 st.subheader("🔍 Localizar Registro")
 termo_busca = st.text_input("Pesquise digitando o Nome do cliente ou o Número de Telefone:")
 
@@ -29,7 +28,6 @@ else:
 
 st.dataframe(df_filtrado[["Cliente", "Telefone", "Valor", "Data_Cobranca", "Status"]], use_container_width=True)
 
-# --- FORMULÁRIO OPERACIONAL DE NOVO CADASTRO ---
 with st.expander("➕ Cadastrar Nova Cobrança", expanded=False):
     with st.form("cadastro_cliente", clear_on_submit=True):
         nome = st.text_input("Nome Completo *")
