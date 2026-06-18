@@ -7,7 +7,7 @@ st.set_page_config(page_title="CobraAI - Cobranças", page_icon="💸", layout="
 if st.button("🏠 Voltar para a Home"):
     st.switch_page("app.py")
 
-st.sidebar.title("💰 CobraAI")
+st.sidebar.title("🐍 CobrAI")
 st.sidebar.text_input("Chave API Gemini", type="password", key="gemini_api_key")
 
 st.title("💸 Gestão de Cobranças")
