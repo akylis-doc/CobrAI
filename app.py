@@ -17,7 +17,7 @@ if "df_cobrancas" not in st.session_state:
 st.sidebar.title("🐍 CobrAI")
 st.sidebar.text_input("Chave API Gemini", type="password", key="gemini_api_key", help="Cole sua chave aqui para ativar a IA em todas as páginas.")
 
-st.title("CobraAI — Sistema de Gestão Financeira 💰")
+st.title("🐍 CobrAI — Sistema de Gestão Financeira")
 st.subheader("Selecione um painel abaixo para gerenciar sua operação:")
 st.write("---")
 
