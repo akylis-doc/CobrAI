@@ -2,11 +2,9 @@ import streamlit as st
 
 st.set_page_config(page_title="CobraAI - Pix", page_icon="⚡", layout="wide")
 
-# Botão para voltar à página principal
 if st.button("🏠 Voltar para a Home"): 
     st.switch_page("app.py")
 
-# Mantém a sincronização da API Key na barra lateral
 st.sidebar.title("💰 CobraAI")
 st.sidebar.text_input("Chave API Gemini", type="password", key="gemini_api_key")
 
