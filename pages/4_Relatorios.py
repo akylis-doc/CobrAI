@@ -1,9 +1,9 @@
 import streamlit as st
-from openai import OpenAI  # <--- Acrescentado para o DeepSeek
+from openai import OpenAI
 
 st.title("🤖 Negociação IA")
 
-api_key = st.session_state.get("gemini_api_key")  # Mantivemos o nome da chave da tua sidebar
+api_key = st.session_state.get("gemini_api_key")
 
 historico = [
     ("assistant", "Olá João. Identificamos uma pendência de R$150."),
