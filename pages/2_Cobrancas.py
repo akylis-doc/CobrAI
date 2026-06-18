@@ -18,7 +18,6 @@ st.subheader("🔍 Localizar Registro")
 termo_busca = st.text_input("Pesquise digitando o Nome do cliente ou o Número de Telefone:")
 
 if termo_busca:
-    # Filtra se bater parte do nome OU parte do telefone
     df_filtrado = df[
         df["Cliente"].astype(str).str.contains(termo_busca, case=False, na=False) |
         df["Telefone"].astype(str).str.contains(termo_busca, case=False, na=False)
