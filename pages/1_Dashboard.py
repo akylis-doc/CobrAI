@@ -4,7 +4,6 @@ import plotly.express as px
 
 st.set_page_config(page_title="CobraAI - Dashboard", page_icon="📊", layout="wide")
 
-# Botão Home obrigatório
 if st.button("🏠 Voltar para a Home"):
     st.switch_page("app.py")
 
@@ -15,7 +14,6 @@ st.title("Dashboard Executivo")
 
 df = st.session_state.get("df_cobrancas")
 
-# Cálculos dinâmicos
 total_cobrancas = len(df)
 df_pagos = df[df["Status"] == "Pago"]
 valor_recuperado = df_pagos["Valor"].sum()
