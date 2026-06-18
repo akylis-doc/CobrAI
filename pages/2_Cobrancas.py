@@ -34,7 +34,7 @@ with st.expander("➕ Cadastrar Nova Cobrança", expanded=False):
         telefone = st.text_input("Número de Telefone / WhatsApp *")
         valor = st.number_input("Valor da Cobrança (R$) *", min_value=0.0, step=10.0, format="%.2f")
         data_cobranca = st.date_input("Data de Vencimento / Cobrança", value=datetime.now())
-        motivo = st.selectbox("Classificação de Inadimplência", ["Esquecimento", "Sem dinheiro", "Banco", "Outros"])
+        motivo = st.selectbox("Possível motivo de Inadimplência", ["Esquecimento", "Sem dinheiro", "Banco", "Outros"])
         
         submetido = st.form_submit_button("Confirmar e Salvar")
         
