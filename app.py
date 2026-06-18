@@ -3,7 +3,6 @@ import pandas as pd
 
 st.set_page_config(page_title="CobraAI - Home", page_icon="💰", layout="wide")
 
-# 1. INICIALIZAÇÃO CENTRAL DO BANCO DE DADOS
 if "df_cobrancas" not in st.session_state:
     st.session_state["df_cobrancas"] = pd.DataFrame({
         "Cliente": ["João", "Maria", "Pedro", "Ana", "Lucas"],
@@ -15,16 +14,13 @@ if "df_cobrancas" not in st.session_state:
         "Motivo": ["Esquecimento", "Sem dinheiro", "Banco", "Esquecimento", "Banco"]
     })
 
-# Barra lateral global para inserção da API Key
 st.sidebar.title("💰 CobraAI")
 st.sidebar.text_input("Chave API Gemini", type="password", key="gemini_api_key", help="Cole sua chave aqui para ativar a IA em todas as páginas.")
 
-# Conteúdo do Menu Principal
 st.title("CobraAI — Sistema de Gestão Financeira 💰")
 st.subheader("Selecione um painel abaixo para gerenciar sua operação:")
 st.write("---")
 
-# Layout de Grid para os Botões de Navegação
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
