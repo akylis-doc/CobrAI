@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+import pandas as pd
 
 # Configuração da página
 st.set_page_config(page_title="CobraAI - Chatbot", page_icon="🤖", layout="wide")
@@ -14,16 +15,47 @@ api_key = st.sidebar.text_input("Chave API Gemini", type="password", key="gemini
 # Título principal
 st.title("🤖 Chatbot de Negociação")
 
-# Verifica se o dataframe existe no session_state
+# ===== CARREGAR DADOS DE EXEMPLO =====
 if "df_cobrancas" not in st.session_state:
-    st.error("⚠️ Nenhum dado de cobrança encontrado. Por favor, carregue os dados primeiro.")
-    st.stop()
+    # Dados de exemplo
+    dados_exemplo = {
+        "Cliente": [
+            "João Silva", 
+            "Maria Santos", 
+            "Pedro Oliveira", 
+            "Ana Costa", 
+            "Carlos Lima"
+        ],
+        "Valor": [
+            1500.00, 
+            2300.50, 
+            850.75, 
+            3200.00, 
+            1750.30
+        ],
+        "Vencimento": [
+            "2024-01-15", 
+            "2024-02-20", 
+            "2024-03-10", 
+            "2024-01-25", 
+            "2024-02-15"
+        ],
+        "Status": [
+            "Vencido", 
+            "Vencido", 
+            "Parcial", 
+            "Vencido", 
+            "Parcial"
+        ]
+    }
+    st.session_state.df_cobrancas = pd.DataFrame(dados_exemplo)
+    st.success("✅ Dados de exemplo carregados com sucesso!")
 
 df = st.session_state.get("df_cobrancas")
 
-# Verifica se o dataframe está vazio
-if df.empty:
-    st.error("⚠️ O dataframe de cobranças está vazio.")
+# Verifica se o dataframe existe
+if df is None or df.empty:
+    st.error("⚠️ Nenhum dado de cobrança encontrado. Por favor, carregue os dados primeiro.")
     st.stop()
 
 # Seleção do cliente
