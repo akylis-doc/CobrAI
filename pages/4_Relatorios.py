@@ -3,17 +3,14 @@ import plotly.express as px
 
 st.set_page_config(page_title="CobraAI - Relatórios", page_icon="📈", layout="wide")
 
-# Botão para voltar à página principal
 if st.button("🏠 Voltar para a Home"): 
     st.switch_page("app.py")
 
-# Mantém a sincronização da API Key na barra lateral
 st.sidebar.title("💰 CobraAI")
 st.sidebar.text_input("Chave API Gemini", type="password", key="gemini_api_key")
 
 st.title("📈 Relatórios Analytics")
 
-# Puxa os dados reais salvos na sessão
 df = st.session_state.get("df_cobrancas")
 
 if df is not None and not df.empty:
