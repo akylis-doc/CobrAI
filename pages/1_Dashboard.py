@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.set_page_config(page_title="CobraAI - Dashboard", page_icon="📊", layout="wide")
+st.set_page_config(page_title="CobrAI - Dashboard", page_icon="📊", layout="wide")
 
 if st.button("🏠 Voltar para a Home"):
     st.switch_page("app.py")
